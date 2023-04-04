@@ -1,5 +1,5 @@
 -- migrate:up
-CREATE TABLE orders {
+CREATE TABLE orders (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
   total_price DECIMAL(8,2) NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE orders {
   CONSTRAINT orders_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id),
   CONSTRAINT orders_status_id_fkey FOREIGN KEY (status_id) REFERENCES order_statuses(id),
   CONSTRAINT orders_address_id_fkey FOREIGN KEY (address_id) REFERENCES addresses(id)
-}
+)
 
 -- migrate:down
 
