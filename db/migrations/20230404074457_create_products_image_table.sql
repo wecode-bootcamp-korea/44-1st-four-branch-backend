@@ -1,5 +1,5 @@
 -- migrate:up
-CREATE TABLE product_image {
+CREATE TABLE products_images {
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   product_id INT NOT NULL,
   image_id INT NOT NULL,
