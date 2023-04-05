@@ -20,6 +20,17 @@ app.get('/ping', function (req, res, next) {
   res.status(200).json({ message: 'pong' });
 });
 
+//test
+
+app.get('/products', (req, res, next) => {
+  const name = req.query.name;
+  const age = req.query.age;
+
+  res.status(200).json({ result: [name, age] });
+});
+
+//test_end
+
 app.all('*', (req, res, next) => {
   const err = new Error(`Can't find ${req.originalUrl} on this server!`);
   err.statusCode = 404;
@@ -28,7 +39,7 @@ app.all('*', (req, res, next) => {
 
 app.use(globalErrorHandler);
 
-appDataSource
+/*appDataSource
   .initialize()
   .then(() => {
     console.log('Data Source has been initialized!');
@@ -36,7 +47,7 @@ appDataSource
   .catch((err) => {
     console.error('Error during Data Source initialization', err);
   });
-
+*/
 const start = async () => {
   try {
     app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
