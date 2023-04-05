@@ -30,6 +30,27 @@ const signUp = async (first_name, last_name, email, password) => {
   return signUp;
 };
 
+const signIn = async (email, password) => {
+  const user = await userDao.signIn(email);
+  if (!user.test(email)) {
+    const err = new Error('INVALID EMAIL');
+    err.statusCode = 400;
+    throw err;
+  }
+
+  const checkPassword = await bcrypt.compare(password, user.password);
+  if (!checkPassword.test(password)) {
+    const err = new Error('INVALID PASSWORD');
+    err.statusCode = 400;
+    throw err;
+  }
+
+  const payLoad = { userID: user.id };
+  const token = jwt.sign(payLoad, process.env.SECRET_KEY, { expiresIn: '5d' });
+  return token;
+};
+
 module.exports = {
   signUp,
+  signIn,
 };
