@@ -82,7 +82,7 @@ const getProductsByMainCategory = async (mainCategory) => {
 
 const getProductById = async (productId) => {
   try {
-    const [product] = await appDataSource.query(
+    return await appDataSource.query(
       `SELECT 
               p.id,
               p.name,
@@ -113,7 +113,6 @@ const getProductById = async (productId) => {
           WHERE p.id = ?`,
       [productId]
     );
-    return product;
   } catch (err) {
     err.message = 'DATABASE_ERROR';
     err.statusCode = 400;
