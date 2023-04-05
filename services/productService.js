@@ -1,9 +1,14 @@
 const productDao = require('../models/productDao');
 
-const getProductsByCategory = async (subCategory) => {
+const getProductsBySubCategory = async (subCategory) => {
   return productDao.getProductsByCategory(subCategory);
 };
 
+const getAllProducts = async () => {
+  return productDao.getAllProducts();
+};
+
 module.exports = {
-  getProductsByCategory,
+  getProductsBySubCategory,
+  getAllProducts,
 };

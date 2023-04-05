@@ -17,6 +17,12 @@ const productsBySubCategory = catchAsync(async (req, res) => {
   res.status(200).json(productsByCategory);
 });
 
+const getAllProducts = catchAsync(async (req, res) => {
+  const allProducts = await productService.getAllProducts();
+  res.status(200).json(allProducts);
+});
+
 module.exports = {
   productsBySubCategory,
+  getAllProducts,
 };
