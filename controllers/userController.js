@@ -9,12 +9,7 @@ const signUp = catchAsync(async (req, res) => {
     error.statusCode = 400;
     throw error;
   }
-  const signUp = await userService.signUp(
-    first_name,
-    last_name,
-    email,
-    password
-  );
+  await userService.signUp(first_name, last_name, email, password);
 
   res.status(201).json({ message: 'CREATED USER' });
 });
@@ -24,9 +19,9 @@ const signIn = catchAsync(async (req, res) => {
 
   try {
     const accessToken = await userService.signIn(email, password);
-    res.status(200).json({ accessToken });
+    res.status(200).json({ accessToken: accessToken });
   } catch (err) {
-    res.status(err.statusCode || 500).json({ accessToken });
+    res.status(err.statusCode || 500).json({ message: err.message });
   }
 });
 

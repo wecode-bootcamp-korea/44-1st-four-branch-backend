@@ -8,11 +8,28 @@ const signUp = async (first_name, last_name, email, password) => {
         last_name,
         email,
         password,
-        point,
-        agreements
-      ) VALUES (?, ?, ?, ?, 100000, json_object(1,"true",2,"true"))
+        point
+      ) VALUES (?, ?, ?, ?, 100000)
       `,
-      [first_name, last_name, email, password]
+      [first_name, last_name, email, password, email]
+    );
+    return result;
+  } catch (err) {
+    err.message = 'INVALID DATA';
+    err.statusCode = 400;
+    throw err;
+  }
+};
+
+const duplicationEmail = async (email) => {
+  try {
+    const [result] = await appDataSource.query(
+      `SELECT
+      id
+      FROM users
+      WHERE email = ?
+      `,
+      [email]
     );
     return result;
   } catch (err) {
@@ -24,7 +41,7 @@ const signUp = async (first_name, last_name, email, password) => {
 
 const signIn = async (email) => {
   try {
-    const logIn = await appDataSource.query(
+    const [logIn] = await appDataSource.query(
       `SELECT
       id,
       email,
@@ -45,4 +62,5 @@ const signIn = async (email) => {
 module.exports = {
   signUp,
   signIn,
+  duplicationEmail,
 };
