@@ -16,9 +16,14 @@ const getProductById = async (productId) => {
   return productDao.getProductById(productId);
 };
 
+const getMainProducts = async (isMain) => {
+  return productDao.getMainProducts(isMain);
+};
+
 module.exports = {
   getProductsBySubCategory,
   getProductsByMainCategory,
   getProductById,
   getAllProducts,
+  getMainProducts,
 };
