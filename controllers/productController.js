@@ -1,28 +1,28 @@
 const productService = require('../services/productService');
 const { catchAsync } = require('../utils/error');
 
-const productsBySubCategory = catchAsync(async (req, res) => {
-  const subCategory = Number(req.query.sub);
+const getProducts = catchAsync(async (req, res) => {
+  const subCategory = Number(req.query.subid);
+  const mainCategory = Number(req.query.mainid);
+  const productId = Number(req.query.pid);
 
-  if (!subCategory) {
-    const error = new Error('KEY_ERROR');
-    error.statusCode = 400;
-    throw error;
+  if (subCategory) {
+    const products = await productService.getProductsBySubCategory(subCategory);
+    res.status(200).json(products);
+  } else if (mainCategory) {
+    const products = await productService.getProductsByMainCategory(
+      mainCategory
+    );
+    res.status(200).json(products);
+  } else if (productId) {
+    const product = await productService.getProductById(productId);
+    res.status(200).json(product);
+  } else {
+    const products = await productService.getAllProducts();
+    res.status(200).json(products);
   }
-
-  const productsByCategory = await productService.getProductsBySubCategory(
-    subCategory
-  );
-
-  res.status(200).json(productsByCategory);
-});
-
-const getAllProducts = catchAsync(async (req, res) => {
-  const allProducts = await productService.getAllProducts();
-  res.status(200).json(allProducts);
 });
 
 module.exports = {
-  productsBySubCategory,
-  getAllProducts,
+  getProducts,
 };
