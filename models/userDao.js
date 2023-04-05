@@ -1,6 +1,6 @@
 const appDataSource = require('./appDataSource');
 
-const signUp = async (first_name, last_name, email, password) => {
+const creatUser = async (firstName, lastName, email, password) => {
   try {
     const result = await appDataSource.query(
       `INSERT INTO users(
@@ -11,7 +11,7 @@ const signUp = async (first_name, last_name, email, password) => {
         point
       ) VALUES (?, ?, ?, ?, 100000)
       `,
-      [first_name, last_name, email, password, email]
+      [firstName, lastName, email, password, email]
     );
     return result;
   } catch (err) {
@@ -24,14 +24,16 @@ const signUp = async (first_name, last_name, email, password) => {
 const duplicationEmail = async (email) => {
   try {
     const [result] = await appDataSource.query(
-      `SELECT
-      id
-      FROM users
-      WHERE email = ?
-      `,
+      `SELECT EXISTS (
+        SELECT
+        id
+        FROM users
+        WHERE email = ?
+        ) registerd 
+        `,
       [email]
     );
-    return result;
+    return !!parseInt(result.registerd);
   } catch (err) {
     err.message = 'INVALID DATA';
     err.statusCode = 400;
@@ -39,7 +41,7 @@ const duplicationEmail = async (email) => {
   }
 };
 
-const signIn = async (email) => {
+const getUserByEmail = async (email) => {
   try {
     const [logIn] = await appDataSource.query(
       `SELECT
@@ -60,7 +62,7 @@ const signIn = async (email) => {
 };
 
 module.exports = {
-  signUp,
-  signIn,
+  creatUser,
+  getUserByEmail,
   duplicationEmail,
 };
