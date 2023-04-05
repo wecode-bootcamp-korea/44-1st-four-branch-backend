@@ -20,17 +20,6 @@ app.get('/ping', function (req, res, next) {
   res.status(200).json({ message: 'pong' });
 });
 
-/*test
-
-app.get('/products', (req, res, next) => {
-  const name = req.query.name;
-  const age = req.query.age;
-
-  res.status(200).json({ result: [name, age] });
-});
-
-test_end*/
-
 app.all('*', (req, res, next) => {
   const err = new Error(`Can't find ${req.originalUrl} on this server!`);
   err.statusCode = 404;
