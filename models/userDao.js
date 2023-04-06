@@ -61,8 +61,28 @@ const getUserByEmail = async (email) => {
   }
 };
 
+const addressInfo = async (country, postcode, detail, userid) => {
+  try {
+    const result = await appDataSource.query(
+      `INSERT INTO addresses
+        country,
+        postcode,
+        datail,
+        user_id
+      `,
+      [country, postcode, detail, userid]
+    );
+    return result;
+  } catch (err) {
+    err.message = 'INVALID DATA';
+    err.statusCode = 400;
+    throw err;
+  }
+};
+
 module.exports = {
   creatUser,
   getUserByEmail,
   duplicationEmail,
+  addressInfo,
 };

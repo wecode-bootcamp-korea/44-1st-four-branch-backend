@@ -20,7 +20,18 @@ const signIn = catchAsync(async (req, res) => {
   res.status(200).json({ accessToken });
 });
 
+const addressInfo = catchAsync(async (req, res) => {
+  const { country, postcode, detail, userid } = req.body;
+  if (!country || !postcode || !detail || !userid) {
+    const error = new Error('KEY ERROR');
+    error.statusCode = 400;
+    throw error;
+  }
+  await userService.addressInfo(country, postcode, detail, userid);
+});
+
 module.exports = {
   signUp,
   signIn,
+  addressInfo,
 };
