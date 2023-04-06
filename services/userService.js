@@ -8,14 +8,14 @@ const {
 } = require('../utils/validation-check');
 
 const signUp = async (firstName, lastName, email, password) => {
+  await emailValidationCheck(email);
+  await passwordValidationCheck(password);
   const emailcheck = await userDao.duplicationEmail(email);
   if (emailcheck) {
     const error = new Error('CANT USE EMAIL');
     error.statusCode = 400;
     throw error;
   }
-  await emailValidationCheck(email);
-  await passwordValidationCheck(password);
 
   const saltRounds = 10;
   const hashedPassword = await bcrypt.hash(password, saltRounds);
