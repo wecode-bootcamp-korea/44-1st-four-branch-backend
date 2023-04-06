@@ -1,17 +1,15 @@
 const appDataSource = require('./appDataSource');
 
-const getProductsByCondition = async (subId, mainId, pId, isMain) => {
+const getProductsByCondition = async (subid, mainid, pid, ismain) => {
   try {
-    let condition = '';
-    if (subId) {
-      condition = `WHERE sc.id = ${subId}`;
-    } else if (mainId) {
-      condition = `WHERE m.id = ${mainId}`;
-    } else if (pId) {
-      condition = `WHERE p.id = ${pId}`;
-    } else if (isMain) {
-      condition = `WHERE p.main_product = ${isMain}`;
-    }
+    const conditions = [
+      subid && `WHERE sc.id = ${subid}`,
+      mainid && `WHERE m.id = ${mainid}`,
+      pid && `WHERE p.id = ${pid}`,
+      ismain && `WHERE p.main_product = ${ismain}`,
+    ].filter(Boolean);
+
+    const condition = conditions[0] || '';
 
     return await appDataSource.query(
       `SELECT 
@@ -19,6 +17,7 @@ const getProductsByCondition = async (subId, mainId, pId, isMain) => {
         p.name,
         p.price,
         p.description,
+        p.summary,
         p.size_id sizeId,
         p.sub_category_id subCategoryId,
         s.size size,
