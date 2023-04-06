@@ -1,12 +1,12 @@
 const appDataSource = require('./appDataSource');
 
-const getProductsByCondition = async (subId, mainId, pId, isMain) => {
+const getProductsByCondition = async (subid, mainid, pid, ismain) => {
   try {
     const conditions = [
-      subId && `WHERE sc.id = ${subId}`,
-      mainId && `WHERE m.id = ${mainId}`,
-      pId && `WHERE p.id = ${pId}`,
-      isMain && `WHERE p.main_product = ${isMain}`,
+      subid && `WHERE sc.id = ${subid}`,
+      mainid && `WHERE m.id = ${mainid}`,
+      pid && `WHERE p.id = ${pid}`,
+      ismain && `WHERE p.main_product = ${ismain}`,
     ].filter(Boolean);
 
     const condition = conditions[0] || '';
