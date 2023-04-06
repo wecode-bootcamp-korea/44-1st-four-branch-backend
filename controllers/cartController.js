@@ -22,8 +22,15 @@ const readCart = catchAsync(async (req, res) => {
   res.status(200).json(cart);
 });
 
+const changeQuantity = catchAsync(async (req, res) => {
+  const { productId, quantity } = req.body;
+  await cartService.changeQuantity(productId, quantity, req.userId);
+  res.status(200).json({ message: 'QUANTITY_UPDATED' });
+});
+
 module.exports = {
   addToCart,
   deleteFromCart,
   readCart,
+  changeQuantity,
 };

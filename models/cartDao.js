@@ -44,6 +44,7 @@ const plusItemCount = async (productId, userId) => {
 const getCart = async (userId) => {
   return await appDataSource.query(
     `SELECT
+    p.id productId,
     p.name,
     p.price*c.quantity totalPriceByP,
     s.size,
@@ -56,10 +57,20 @@ const getCart = async (userId) => {
   );
 };
 
+const changeQuantity = async (productId, quantity, userId) => {
+  return await appDataSource.query(
+    `UPDATE carts
+    SET quantity = ?
+    WHERE product_id = ? AND user_id = ?`,
+    [quantity, productId, userId]
+  );
+};
+
 module.exports = {
   addToCart,
   deleteFromCart,
   checkIfFirst,
   plusItemCount,
   getCart,
+  changeQuantity,
 };

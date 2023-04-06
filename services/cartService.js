@@ -18,8 +18,13 @@ const readCart = async (userId) => {
   return cartDao.getCart(userId);
 };
 
+const changeQuantity = async (productId, quantity, userId) => {
+  return cartDao.changeQuantity(productId, quantity, userId);
+};
+
 module.exports = {
   addToCart,
   deleteFromCart,
   readCart,
+  changeQuantity,
 };
