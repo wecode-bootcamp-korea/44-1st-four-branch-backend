@@ -19,12 +19,12 @@ const addToCart = catchAsync(async (req, res) => {
 
 const deleteFromCart = catchAsync(async (req, res) => {
   //for test - 추후 변경 예정
-  const { pId, userId } = req.query;
+  const { pid, userid } = req.query;
   //const { pId } = req.query;
 
   //await cartService.deleteFromCart(pId, req.userId);
 
-  await cartService.deleteFromCart(pId, userId);
+  await cartService.deleteFromCart(pid, userid);
 
   res.status(204).send();
 });
