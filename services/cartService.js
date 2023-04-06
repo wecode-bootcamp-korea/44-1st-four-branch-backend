@@ -1,12 +1,13 @@
 const cartDao = require('../models/cartDao');
 
 const addToCart = async (productId, userId) => {
-  //이미 존재하는 아이템인지 확인하기
-  if (exists) {
-  }
-  return cartDao.addToCart(productId, userId);
+  const isFirst = await cartDao.checkIfFirst(productId, userId);
 
-  //이미 존재하는 아이템이면 수량 + 1
+  if (isFirst) {
+    return cartDao.addToCart(productId, userId);
+  } else {
+    return cartDao.plusItemCount(productId, userId);
+  }
 };
 
 const deleteFromCart = async (pId, userId) => {

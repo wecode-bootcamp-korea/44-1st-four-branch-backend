@@ -4,7 +4,7 @@ const userService = require('../services/userService');
 const signUp = catchAsync(async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
-  if (!firstName || !lastname || !email || !password) {
+  if (!firstName || !lastName || !email || !password) {
     const error = new Error('KEY ERROR');
     error.statusCode = 400;
     throw error;
