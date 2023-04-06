@@ -14,7 +14,12 @@ const deleteFromCart = async (pId, userId) => {
   return cartDao.deleteFromCart(pId, userId);
 };
 
+const readCart = async (userId) => {
+  return cartDao.getCart(userId);
+};
+
 module.exports = {
   addToCart,
   deleteFromCart,
+  readCart,
 };
