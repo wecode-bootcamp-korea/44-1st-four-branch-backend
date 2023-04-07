@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+<<<<<<< HEAD
 const secretKey = process.env.SECRET_KEY;
 
 const loginReq = async (req, res, next) => {
@@ -18,3 +19,5 @@ const loginReq = async (req, res, next) => {
 };
 
 module.exports = loginReq;
+=======
+>>>>>>> main
