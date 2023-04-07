@@ -24,6 +24,7 @@ const deleteFromCart = async (cartId) => {
 const getCart = async (userId) => {
   return await appDataSource.query(
     `SELECT
+    c.id cartId,
     p.id productId,
     p.name,
     p.price*c.quantity totalPriceByP,
