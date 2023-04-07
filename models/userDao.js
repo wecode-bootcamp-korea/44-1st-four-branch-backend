@@ -61,8 +61,26 @@ const getUserByEmail = async (email) => {
   }
 };
 
+const getUserById = async (userId) => {
+  try {
+    const [user] = await appDataSource.query(
+      `SELECT
+        *
+      FROM users
+      WHERE id = ?`,
+      [userId]
+    );
+    return user;
+  } catch (err) {
+    err.message = 'DATABASE_ERROR';
+    err.statusCode = 400;
+    throw err;
+  }
+};
+
 module.exports = {
   creatUser,
   getUserByEmail,
   duplicationEmail,
+  getUserById,
 };
