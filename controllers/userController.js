@@ -28,6 +28,7 @@ const addressInfo = catchAsync(async (req, res) => {
     throw error;
   }
   await userService.addressInfo(country, postcode, detail, userid);
+  res.status(201).json({ message: 'ADDRESS REGIST SUCESS' });
 });
 
 module.exports = {

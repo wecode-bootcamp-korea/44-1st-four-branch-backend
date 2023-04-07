@@ -2,18 +2,17 @@ const appDataSource = require('./appDataSource');
 
 const orderInfo = async (userid, totalprice, number, statusid, addressid) => {
   try {
-    const result = await appDataSource.query(
-      `INSERT INTO orders
-        userid,
-        totalprice,
+    return await appDataSource.query(
+      `INSERT INTO orders(
+        user_id,
+        total_price,
         number,
-        statusid,
-        addressid
-        VALUES (?, ?, ?, ?, ?)
+        status_id,
+        address_id
+        ) VALUES (?, ?, ?, ?, ?)
         `,
       [userid, totalprice, number, statusid, addressid]
     );
-    return result;
   } catch (err) {
     err.message = 'INVALID DATA';
     err.statusCode = 400;
