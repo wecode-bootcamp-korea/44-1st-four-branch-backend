@@ -25,7 +25,7 @@ const readCart = catchAsync(async (req, res) => {
 const changeQuantity = catchAsync(async (req, res) => {
   const { cartId, quantity } = req.body;
   const carts = await cartService.changeQuantity(cartId, quantity, req.userId);
-  res.status(200).json(carts);
+  res.status(201).json(carts);
 });
 
 module.exports = {
