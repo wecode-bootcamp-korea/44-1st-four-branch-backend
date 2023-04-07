@@ -6,7 +6,7 @@ const addToCart = async (productId, userId) => {
 };
 
 const deleteFromCart = async (cartId, userId) => {
-  await cartDao.deleteFromCart(cartId);
+  await cartDao.deleteFromCart(cartId, userId);
   return cartDao.getCart(userId);
 };
 
@@ -16,7 +16,7 @@ const readCart = async (userId) => {
 };
 
 const changeQuantity = async (cartId, quantity, userId) => {
-  await cartDao.changeQuantity(cartId, quantity);
+  await cartDao.changeQuantity(cartId, quantity, userId);
   return cartDao.getCart(userId);
 };
 

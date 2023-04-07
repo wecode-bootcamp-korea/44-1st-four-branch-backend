@@ -63,16 +63,14 @@ const getUserByEmail = async (email) => {
 
 const getUserById = async (userId) => {
   try {
-    const [{ checking }] = await appDataSource.query(
-      `SELECT EXISTS (
-        SELECT
-        id
-        FROM users
-        WHERE id = ?
-        ) checking`,
+    const [user] = await appDataSource.query(
+      `SELECT
+        *
+      FROM users
+      WHERE id = ?`,
       [userId]
     );
-    return !!parseInt(checking);
+    return user;
   } catch (err) {
     err.message = 'DATABASE_ERROR';
     err.statusCode = 400;

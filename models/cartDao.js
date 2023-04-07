@@ -13,11 +13,11 @@ const createOrUpateCart = async (productId, userId) => {
   );
 };
 
-const deleteFromCart = async (cartId) => {
+const deleteFromCart = async (cartId, userId) => {
   return await appDataSource.query(
     `DELETE FROM carts
-    WHERE id IN (?)`,
-    [cartId]
+    WHERE user_id = ? AND id IN (?)`,
+    [userId, cartId]
   );
 };
 
@@ -38,12 +38,12 @@ const getCart = async (userId) => {
   );
 };
 
-const changeQuantity = async (cartId, quantity) => {
+const changeQuantity = async (cartId, quantity, userId) => {
   return await appDataSource.query(
     `UPDATE carts
     SET quantity = ?
-    WHERE id = ?`,
-    [quantity, cartId]
+    WHERE id = ? AND user_id = ?`,
+    [quantity, cartId, userId]
   );
 };
 

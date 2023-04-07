@@ -20,8 +20,7 @@ const loginReq = catchAsync(async (req, res, next) => {
 
     return next(error);
   }
-  req.userId = decoded.userId;
-
+  req.user = user;
   next();
 });
 
