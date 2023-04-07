@@ -44,7 +44,12 @@ const signIn = async (email, password) => {
   return token;
 };
 
+const getUserById = async (userId) => {
+  return userDao.getUserById(userId);
+};
+
 module.exports = {
   signUp,
   signIn,
+  getUserById,
 };

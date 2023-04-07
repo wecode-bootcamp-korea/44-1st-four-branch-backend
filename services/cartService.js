@@ -1,17 +1,11 @@
 const cartDao = require('../models/cartDao');
 
-const addToCart = async (productId, userId) => {
-  const isFirst = await cartDao.checkIfFirst(productId, userId);
-
-  if (isFirst) {
-    return cartDao.addToCart(productId, userId);
-  } else {
-    return cartDao.plusItemCount(productId, userId);
-  }
+const addToCart = async (productId, userId, quantity) => {
+  return cartDao.createOrUpateCart(productId, userId, quantity);
 };
 
-const deleteFromCart = async (pId, userId) => {
-  return cartDao.deleteFromCart(pId, userId);
+const deleteFromCart = async (cartId) => {
+  return cartDao.deleteFromCart(cartId);
 };
 
 module.exports = {

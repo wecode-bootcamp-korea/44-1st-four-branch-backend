@@ -1,23 +1,28 @@
 const jwt = require('jsonwebtoken');
-<<<<<<< HEAD
-const secretKey = process.env.SECRET_KEY;
+const userService = require('../services/userService');
+const { catchAsync } = require('./error');
 
-const loginReq = async (req, res, next) => {
-  try {
-    const token = req.headers.authorization;
+const loginReq = catchAsync(async (req, res, next) => {
+  const token = req.headers.authorization;
 
-    if (!token) {
-      return res.status(400).json({ message: 'TOKEN_NEEDED' });
-    }
-
-    const decoded = jwt.verify(token, secretKey);
-    req.userId = decoded.userId;
-    next();
-  } catch {
-    return res.status(400).json({ message: 'AUTHORIZATION_ERROR' });
+  if (!token) {
+    const error = new Error('TOKEN_NEEDED');
+    error.statusCode = 401;
+    return next(error);
   }
-};
+
+  const decoded = jwt.verify(token, process.env.SECRET_KEY);
+  const user = await userService.getUserById(decoded.userId);
+
+  if (!user) {
+    const error = new Error('USER_DOES_NOT_EXIST');
+    error.statusCode = 404;
+
+    return next(error);
+  }
+  req.userId = decoded.userId;
+
+  next();
+});
 
 module.exports = loginReq;
-=======
->>>>>>> main

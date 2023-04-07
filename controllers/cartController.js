@@ -10,9 +10,9 @@ const addToCart = catchAsync(async (req, res) => {
 });
 
 const deleteFromCart = catchAsync(async (req, res) => {
-  const { pid } = req.query;
+  const { cartid: cartId } = req.query;
 
-  await cartService.deleteFromCart(pid, req.userId);
+  await cartService.deleteFromCart(cartId);
 
   res.status(204).send();
 });
