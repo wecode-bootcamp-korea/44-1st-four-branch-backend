@@ -14,7 +14,7 @@ const deleteFromCart = catchAsync(async (req, res) => {
 
   await cartService.deleteFromCart(cartId);
 
-  res.status(204).send();
+  res.status(200).json({});
 });
 
 module.exports = {
