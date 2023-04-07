@@ -21,7 +21,34 @@ const deleteFromCart = async (cartId) => {
   );
 };
 
+const getCart = async (userId) => {
+  return await appDataSource.query(
+    `SELECT
+    p.id productId,
+    p.name,
+    p.price*c.quantity totalPriceByP,
+    s.size,
+    c.quantity
+    FROM carts c
+    JOIN products p ON p.id = c.product_id
+    JOIN sizes s ON p.size_id = s.id
+    WHERE user_id = ?`,
+    [userId]
+  );
+};
+
+const changeQuantity = async (cartId, quantity) => {
+  return await appDataSource.query(
+    `UPDATE carts
+    SET quantity = ?
+    WHERE id = ?`,
+    [quantity, cartId]
+  );
+};
+
 module.exports = {
   createOrUpateCart,
   deleteFromCart,
+  getCart,
+  changeQuantity,
 };
