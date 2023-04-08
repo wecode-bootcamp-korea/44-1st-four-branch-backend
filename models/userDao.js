@@ -61,17 +61,17 @@ const getUserByEmail = async (email) => {
   }
 };
 
-const addressInfo = async (country, postcode, detail, userid) => {
+const addressInfo = async (country, postcode, detail, userId) => {
   try {
     return await appDataSource.query(
-      `INSERT INTO addresses(
-        country,
-        postcode,
+      `INSERT INTO addresses (
+        country ,
+        postcode ,
         detail,
-        user_id
-        ) VALUES (?, ?, ?, ?)
-        `,
-      [country, postcode, detail, userid]
+        user_id 
+      ) VALUES (?, ?, ?, ?)
+      `,
+      [country, postcode, detail, userId]
     );
   } catch (err) {
     err.message = 'INVALID DATA';

@@ -4,7 +4,7 @@ const userService = require('../services/userService');
 const signUp = catchAsync(async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
-  if (!firstName || !lastname || !email || !password) {
+  if (!firstName || !lastName || !email || !password) {
     const error = new Error('KEY ERROR');
     error.statusCode = 400;
     throw error;
@@ -21,13 +21,14 @@ const signIn = catchAsync(async (req, res) => {
 });
 
 const addressInfo = catchAsync(async (req, res) => {
-  const { country, postcode, detail, userid } = req.body;
-  if (!country || !postcode || !detail || !userid) {
+  const { country, postcode, detail } = req.body;
+  const userId = req.userId;
+  if (!country || !postcode || !detail) {
     const error = new Error('KEY ERROR');
     error.statusCode = 400;
     throw error;
   }
-  await userService.addressInfo(country, postcode, detail, userid);
+  await userService.addressInfo(country, postcode, detail, userId);
   res.status(201).json({ message: 'ADDRESS REGIST SUCESS' });
 });
 

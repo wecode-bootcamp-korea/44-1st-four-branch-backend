@@ -44,8 +44,8 @@ const signIn = async (email, password) => {
   return token;
 };
 
-const addressInfo = async (country, postcode, detail, userid) => {
-  return await userDao.addressInfo(country, postcode, detail, userid);
+const addressInfo = async (country, postcode, detail, email) => {
+  return await userDao.addressInfo(country, postcode, detail, email);
 };
 
 module.exports = {

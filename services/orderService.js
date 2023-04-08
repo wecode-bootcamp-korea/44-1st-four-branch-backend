@@ -1,7 +1,7 @@
 const orderDao = require('../models/orderDao');
 
-const orderInfo = async (userid, totalprice, number, statusid, addressid) => {
-  return orderDao.orderInfo(userid, totalprice, number, statusid, addressid);
+const orderInfo = async (userId, totalprice, statusid) => {
+  return orderDao.orderInfo(userId, totalprice, statusid);
 };
 
 module.exports = {

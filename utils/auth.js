@@ -8,7 +8,6 @@ const loginReq = async (req, res, next) => {
     if (!token) {
       return res.status(400).json({ message: 'TOKEN_NEEDED' });
     }
-
     const decoded = jwt.verify(token, secretKey);
     req.userId = decoded.userId;
     next();
