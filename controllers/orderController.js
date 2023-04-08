@@ -4,9 +4,9 @@ const { catchAsync } = require('../utils/error');
 const payByPoint = catchAsync(async (req, res) => {
   const { orderNumber } = req.body;
 
-  await orderService.payByPoint(orderNumber);
+  const userPoint = await orderService.payByPoint(orderNumber, req.user.id);
 
-  res.status(200).json({ message: 'PAYMENT_COMPLETE' });
+  return res.status(200).json(userPoint);
 });
 
 module.exports = {
