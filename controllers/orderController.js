@@ -1,7 +1,7 @@
 const orderService = require('../services/orderService');
 const { catchAsync } = require('../utils/error');
 
-const orderInfo = catchAsync(async (req, res) => {
+const createOrder = catchAsync(async (req, res) => {
   const { totalPrice } = req.body;
   const userId = req.userId;
   if (!totalPrice) {
@@ -9,10 +9,24 @@ const orderInfo = catchAsync(async (req, res) => {
     error.statusCode = 400;
     return error;
   }
-  await orderService.orderInfo(userId, totalPrice);
+  await orderService.createOrder(userId, totalPrice);
   res.status(201).json({ message: 'ORDER DEPOSIT' });
 });
 
+const orderItems = catchAsync(async (req, res) => {
+  const userId = req.userId;
+  await orderService.orderItems(userId);
+  res.status(201).json({ message: 'SUCCESS' });
+});
+
+const orderInfo = catchAsync(async (req, res) => {
+  const userId = req.userId;
+  const orderDetail = await orderService.orderInfo(userId);
+  res.status(201).json({ orderDetail });
+});
+
 module.exports = {
+  createOrder,
+  orderItems,
   orderInfo,
 };
