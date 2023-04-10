@@ -11,7 +11,6 @@ const deleteFromCart = async (cartId, userId) => {
 };
 
 const readCart = async (userId) => {
-  await cartDao.getCart(userId);
   return cartDao.getCart(userId);
 };
 

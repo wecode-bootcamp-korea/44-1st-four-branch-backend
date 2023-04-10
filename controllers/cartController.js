@@ -6,7 +6,7 @@ const addToCart = catchAsync(async (req, res) => {
 
   const carts = await cartService.addToCart(productId, req.user.id);
 
-  res.status(200).json(carts);
+  res.status(201).json(carts);
 });
 
 const deleteFromCart = catchAsync(async (req, res) => {
