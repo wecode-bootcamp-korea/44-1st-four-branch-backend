@@ -1,8 +1,8 @@
-const appdataSource = require('./appDataSource');
+const appDataSource = require('./appDataSource');
 
 const searchProduct = async (keyword) => {
   try {
-    return appdataSource.query(
+    return appDataSource.query(
       `SELECT 
       products.id,
       products.name,
@@ -20,7 +20,14 @@ const searchProduct = async (keyword) => {
   }
 };
 
-const getProductsByCondition = async (subId, mainId, pId, isMain) => {
+const getProductsByCondition = async (
+  subId,
+  mainId,
+  pId,
+  isMain,
+  orderBy,
+  sorting
+) => {
   try {
     const conditions = [
       subId && `WHERE sc.id = ${subId}`,
@@ -29,7 +36,14 @@ const getProductsByCondition = async (subId, mainId, pId, isMain) => {
       isMain && `WHERE p.main_product = ${isMain}`,
     ].filter(Boolean);
 
+    const orderings = [
+      orderBy && `ORDER BY ${orderBy}`,
+      sorting && ` ${sorting}`,
+    ].filter(Boolean);
+
     const condition = conditions[0] || '';
+
+    const ordering = orderings.join('') || '';
 
     return await appDataSource.query(
       `SELECT 
@@ -60,7 +74,8 @@ const getProductsByCondition = async (subId, mainId, pId, isMain) => {
         JOIN products_ingredients pig ON pig.ingredient_id = ig.id
         GROUP BY pig.product_id
     ) joined_ig ON joined_ig.pid = p.id        
-    ${condition}`
+    ${condition}
+    ${ordering}`
     );
   } catch (err) {
     err.message = 'DATABASE_ERROR';
