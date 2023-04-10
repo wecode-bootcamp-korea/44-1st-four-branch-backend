@@ -14,6 +14,7 @@ const createOrder = async (userId, totalPrice) => {
         SELECT ?, ?, ?, addresses.id
         FROM addresses 
         WHERE user_id = ?
+        ORDER BY id DESC LIMIT 1
         `,
       [userId, totalPrice, orderNum, userId]
     );
@@ -51,19 +52,19 @@ const orderInfo = async (userId) => {
   try {
     return await appDataSource.query(
       `SELECT
-      orders.number as '주문번호', 
-      orders.created_at as '주문일자',
-      JSON_OBJECT('country', addresses.country, 'postcode', addresses.postcode, 'detail', addresses.detail) as '배송정보',
-      products.name as '상품이름',
-      sizes.size as '사이즈',
-      products.price as '가격',
-      orders.total_price as '합계'
+      orders.number as orderNumber,
+      orders.updated_at as orderDate,
+      JSON_OBJECT('country', addresses.country, 'postcode', addresses.postcode, 'detail', addresses.detail) as address,
+      products.name as productName,
+      sizes.size as size,
+      products.price price,
+      orders.total_price totalPrice
       FROM orders
       JOIN order_items ON orders.id = order_items.order_id
       JOIN products ON order_items.product_id = products.id
       JOIN addresses ON orders.user_id = addresses.user_id
       JOIN sizes ON products.size_id = sizes.id
-      WHERE orders.id = ?
+      WHERE orders.user_id = ?
       `,
       [userId]
     );

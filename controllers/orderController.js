@@ -22,7 +22,7 @@ const orderItems = catchAsync(async (req, res) => {
 const orderInfo = catchAsync(async (req, res) => {
   const userId = req.userId;
   const orderDetail = await orderService.orderInfo(userId);
-  res.status(201).json({ orderDetail });
+  res.status(201).json(orderDetail);
 });
 
 module.exports = {
