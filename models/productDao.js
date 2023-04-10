@@ -1,8 +1,8 @@
-const appdataSource = require('./appDataSource');
+const appDataSource = require('./appDataSource');
 
 const searchProduct = async (keyword) => {
   try {
-    return appdataSource.query(
+    return appDataSource.query(
       `SELECT 
       products.id,
       products.name,

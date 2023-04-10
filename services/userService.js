@@ -48,8 +48,13 @@ const addressInfo = async (country, postcode, detail, email) => {
   return await userDao.addressInfo(country, postcode, detail, email);
 };
 
+const getUserById = async (userId, lastName) => {
+  return userDao.getUserById(userId, lastName);
+};
+
 module.exports = {
   signUp,
   signIn,
   addressInfo,
+  getUserById,
 };
