@@ -24,7 +24,7 @@ const createOrder = async (userId, totalPrice, orderNum) => {
         order_id,
         product_id,
         quantity,
-        status_id
+        status_id as statusId
         )
         SELECT orders.id, carts.product_id, carts.quantity , orders.status_id
         FROM orders
