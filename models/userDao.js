@@ -9,7 +9,7 @@ const creatUser = async (firstName, lastName, email, password) => {
         email,
         password,
         point
-      ) VALUES (?, ?, ?, ?, 100000)
+      ) VALUES (?, ?, ?, ?, 990000)
       `,
       [firstName, lastName, email, password, email]
     );
@@ -47,7 +47,8 @@ const getUserByEmail = async (email) => {
       `SELECT
       id,
       email,
-      password
+      password,
+      last_name userLastName
       FROM users
       WHERE users.email = ?
       `,
