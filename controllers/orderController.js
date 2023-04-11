@@ -16,7 +16,7 @@ const createOrder = catchAsync(async (req, res) => {
 const orderInfo = catchAsync(async (req, res) => {
   const userId = req.user.id;
   const orderDetail = await orderService.orderInfo(userId);
-  res.status(201).json(orderDetail);
+  res.status(201).json({ orderDetail });
 });
 
 module.exports = {

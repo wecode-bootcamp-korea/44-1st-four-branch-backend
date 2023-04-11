@@ -24,7 +24,7 @@ const createOrder = async (userId, totalPrice, orderNum) => {
         order_id,
         product_id,
         quantity,
-        status_id as statusId
+        status_id
         )
         SELECT orders.id, carts.product_id, carts.quantity , orders.status_id
         FROM orders
@@ -50,17 +50,18 @@ const orderInfo = async (userId) => {
       `SELECT
       orders.number as orderNumber,
       orders.updated_at as orderDate,
-      JSON_OBJECT('country', addresses.country, 'postcode', addresses.postcode, 'detail', addresses.detail) as address,
-      products.name as productName,
-      sizes.size as size,
-      products.price price,
-      orders.total_price totalPrice
+      JSON_OBJECT('country', MAX(addresses.country), 'postcode', MAX(addresses.postcode), 'detail', MAX(addresses.detail)) as address,
+      JSON_ARRAYAGG(JSON_OBJECT('productName', products.name,'quantity', order_items.quantity, 'price', products.price , 'size', sizes.size)) as orderItems,
+      order_statuses.status as orderStatus,
+      orders.total_price as totalPrice
       FROM orders
       JOIN order_items ON orders.id = order_items.order_id
+      JOIN order_statuses ON orders.status_id = order_statuses.id
       JOIN products ON order_items.product_id = products.id
       JOIN addresses ON orders.user_id = addresses.user_id
       JOIN sizes ON products.size_id = sizes.id
       WHERE orders.user_id = ?
+      GROUP BY orders.id
       `,
       [userId]
     );
