@@ -1,12 +1,10 @@
 const appDataSource = require('./appDataSource');
-const { v4: uuid } = require('uuid');
 
-const createOrder = async (userId, totalPrice) => {
+const createOrder = async (userId, totalPrice, orderNum) => {
   const queryRunner = appDataSource.createQueryRunner();
   await queryRunner.connect();
   await queryRunner.startTransaction();
   try {
-    const orderNum = uuid();
     await queryRunner.query(
       `INSERT INTO orders(
         user_id,
@@ -21,27 +19,24 @@ const createOrder = async (userId, totalPrice) => {
         `,
       [userId, totalPrice, orderNum, userId]
     );
-    const orderItems = async (userId) => {
-      await queryRunner.query(
-        `INSERT INTO order_items(
-        order_id ,
-        product_id ,
-        quantity ,
-        status_id
+    await queryRunner.query(
+      `INSERT INTO order_items(
+        order_id as orderId,
+        product_id as productId,
+        quantity,
+        status_id as statusId
         )
         SELECT orders.id, carts.product_id, carts.quantity , orders.status_id
         FROM orders
         JOIN carts ON carts.user_id = orders.user_id
         WHERE orders.user_id = ? AND orders.status_id = 1
       `,
-        [userId]
-      );
-    };
-    await orderItems(userId);
+      [userId]
+    );
     await queryRunner.commitTransaction();
   } catch (err) {
     await queryRunner.rollbackTransaction();
-    err.message = 'INVALID DATA';
+    err.message = 'DATABASE_ERROR';
     err.statusCode = 400;
     throw err;
   } finally {
@@ -70,7 +65,7 @@ const orderInfo = async (userId) => {
       [userId]
     );
   } catch (err) {
-    err.message = 'INVALID DATA';
+    err.message = 'DATABASE_ERROR';
     err.statusCode = 400;
     throw err;
   }

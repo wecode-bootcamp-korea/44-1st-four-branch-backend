@@ -13,12 +13,6 @@ const createOrder = catchAsync(async (req, res) => {
   res.status(201).json({ message: 'ORDER DEPOSIT' });
 });
 
-const orderItems = catchAsync(async (req, res) => {
-  const userId = req.user.id;
-  await orderService.orderItems(userId);
-  res.status(201).json({ message: 'SUCCESS' });
-});
-
 const orderInfo = catchAsync(async (req, res) => {
   const userId = req.user.id;
   const orderDetail = await orderService.orderInfo(userId);
@@ -27,6 +21,5 @@ const orderInfo = catchAsync(async (req, res) => {
 
 module.exports = {
   createOrder,
-  orderItems,
   orderInfo,
 };
