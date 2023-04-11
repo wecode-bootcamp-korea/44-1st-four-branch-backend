@@ -2,33 +2,28 @@ const appDataSource = require('./appDataSource');
 const { v4: uuid } = require('uuid');
 
 const createOrder = async (userId, totalPrice) => {
+  const queryRunner = appDataSource.createQueryRunner();
+  await queryRunner.connect();
+  await queryRunner.startTransaction();
   try {
     const orderNum = uuid();
-    return await appDataSource.query(
+    await queryRunner.query(
       `INSERT INTO orders(
         user_id,
         total_price,
         number,
         address_id
-        ) 
+        )
         SELECT ?, ?, ?, addresses.id
-        FROM addresses 
+        FROM addresses
         WHERE user_id = ?
         ORDER BY id DESC LIMIT 1
         `,
       [userId, totalPrice, orderNum, userId]
     );
-  } catch (err) {
-    err.message = 'INVALID DATA';
-    err.statusCode = 400;
-    throw err;
-  }
-};
-
-const orderItems = async (userId) => {
-  try {
-    return await appDataSource.query(
-      `INSERT INTO order_items(
+    const orderItems = async (userId) => {
+      await queryRunner.query(
+        `INSERT INTO order_items(
         order_id ,
         product_id ,
         quantity ,
@@ -39,12 +34,18 @@ const orderItems = async (userId) => {
         JOIN carts ON carts.user_id = orders.user_id
         WHERE orders.user_id = ? AND orders.status_id = 1
       `,
-      [userId]
-    );
+        [userId]
+      );
+    };
+    await orderItems(userId);
+    await queryRunner.commitTransaction();
   } catch (err) {
+    await queryRunner.rollbackTransaction();
     err.message = 'INVALID DATA';
     err.statusCode = 400;
     throw err;
+  } finally {
+    queryRunner.release();
   }
 };
 
@@ -77,31 +78,53 @@ const orderInfo = async (userId) => {
 
 module.exports = {
   createOrder,
-  orderItems,
   orderInfo,
 };
 
-// 결제하는거에서 orders를 겟하는 다오를 만들건데......
-// orders인투, 셀렉트 오더스 하는걸,
-// 유저
-
-// const orderInfo = async (userId, totalPrice, statusId, addressId) => {
+// const createOrder = async (userId, totalPrice) => {
+//   const queryRunner = appDataSource.createQueryRunner();
+//   await queryRunner.connect();
+//   await queryRunner.startTransaction();
 //   try {
 //     const orderNum = uuid();
-//     return await appDataSource.query(
+//     await queryRunner.query(
 //       `INSERT INTO orders(
 //         user_id,
 //         total_price,
 //         number,
-//         status_id,
 //         address_id
-//         ) VALUES (?, ?, ?, ?, ?)
+//         )
+//         SELECT ?, ?, ?, addresses.id
+//         FROM addresses
+//         WHERE user_id = ?
+//         ORDER BY id DESC LIMIT 1
 //         `,
-//       [userId, totalPrice, orderNum, statusId, addressId]
+//       [userId, totalPrice, orderNum, userId]
 //     );
+//     const orderItems = async (userId) => {
+//       await queryRunner.query(
+//         `INSERT INTO order_items(
+//         order_id ,
+//         product_id ,
+//         quantity ,
+//         status_id
+//         )
+//         SELECT orders.id, carts.product_id, carts.quantity , orders.status_id
+//         FROM orders
+//         JOIN carts ON carts.user_id = orders.user_id
+//         WHERE orders.user_id = ? AND orders.status_id = 1
+//       `,
+//         [userId]
+//       );
+//     };
+//     await orderItems(userId);
+//     await queryRunner.commitTransaction();
 //   } catch (err) {
+//     await queryRunner.rollbackTransaction();
 //     err.message = 'INVALID DATA';
 //     err.statusCode = 400;
 //     throw err;
+//   } finally {
+//     queryRunner.release();
 //   }
-// };
+// }

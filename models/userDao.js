@@ -80,7 +80,7 @@ const addressInfo = async (country, postcode, detail, userId) => {
   }
 };
 
-const getUserById = async (userId, lastName) => {
+const getUserById = async (userId) => {
   try {
     const [user] = await appDataSource.query(
       `SELECT
@@ -94,7 +94,7 @@ const getUserById = async (userId, lastName) => {
         updated_at
       FROM users
       WHERE id = ?`,
-      [userId, lastName]
+      [userId]
     );
     return user;
   } catch (err) {

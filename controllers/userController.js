@@ -17,13 +17,13 @@ const signUp = catchAsync(async (req, res) => {
 const signIn = catchAsync(async (req, res) => {
   const { email, password } = req.body;
   const accessToken = await userService.signIn(email, password);
-  const { name } = await userService.getUserById(lastName);
-  res.status(200).json({ token: accessToken, name: name });
+  // const { name } = await userService.getUserById(lastName);
+  res.status(200).json({ token: accessToken });
 });
 
 const addressInfo = catchAsync(async (req, res) => {
   const { country, postcode, detail } = req.body;
-  const userId = req.userId;
+  const userId = req.user.id;
   if (!country || !postcode || !detail) {
     const error = new Error('KEY ERROR');
     error.statusCode = 400;
