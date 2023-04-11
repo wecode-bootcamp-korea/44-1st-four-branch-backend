@@ -10,13 +10,13 @@ const searchProduct = async (keyword) => {
       FROM products 
       JOIN products_images ON products.id = products_images.product_id 
       JOIN images ON products_images.image_id = images.id
-      WHERE name LIKE '%${keyword}%'
+      WHERE products.name LIKE '%${keyword}%'
       `
     );
   } catch (err) {
-    err.message = 'INVALID_DATA';
-    err.statusCode = 500;
-    throw error;
+    err.message = 'DATABASE_ERROR';
+    err.statusCode = 400;
+    throw err;
   }
 };
 
@@ -47,12 +47,12 @@ const getProductsByCondition = async (subId, mainId, pId, isMain) => {
         i.url imageUrl,
         joined_ig.ig_array ingredients
     FROM products p
-    JOIN sizes s ON p.size_id = s.id
-    JOIN sub_categories sc ON sc.id = p.sub_category_id
-    JOIN main_categories m ON sc.main_category_id = m.id
-    JOIN products_images pi ON p.id = pi.product_id
-    JOIN images i ON i.id = pi.image_id
-    JOIN (
+    LEFT JOIN sizes s ON p.size_id = s.id
+    LEFT JOIN sub_categories sc ON sc.id = p.sub_category_id
+    LEFT JOIN main_categories m ON sc.main_category_id = m.id
+    LEFT JOIN products_images pi ON p.id = pi.product_id
+    LEFT JOIN images i ON i.id = pi.image_id
+    LEFT JOIN (
         SELECT
             pig.product_id pid,
             JSON_ARRAYAGG(ig.name) ig_array
