@@ -21,10 +21,10 @@ const createOrder = async (userId, totalPrice, orderNum) => {
     );
     await queryRunner.query(
       `INSERT INTO order_items(
-        order_id as orderId,
-        product_id as productId,
+        order_id,
+        product_id,
         quantity,
-        status_id as statusId
+        status_id
         )
         SELECT orders.id, carts.product_id, carts.quantity , orders.status_id
         FROM orders
