@@ -62,6 +62,7 @@ const orderInfo = async (userId) => {
       JOIN sizes ON products.size_id = sizes.id
       WHERE orders.user_id = ?
       GROUP BY orders.id
+      ORDER BY orders.id DESC LIMIT 1 
       `,
       [userId]
     );
