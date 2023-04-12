@@ -16,8 +16,8 @@ const signUp = catchAsync(async (req, res) => {
 
 const signIn = catchAsync(async (req, res) => {
   const { email, password } = req.body;
-  const accessToken = await userService.signIn(email, password);
-  res.status(200).json({ token: accessToken });
+  const resUser = await userService.signIn(email, password);
+  res.status(200).json(resUser);
 });
 
 const addressInfo = catchAsync(async (req, res) => {

@@ -41,7 +41,11 @@ const signIn = async (email, password) => {
   const token = jwt.sign({ userId: user.id }, process.env.SECRET_KEY, {
     expiresIn: '5d',
   });
-  return token;
+
+  return {
+    token: token,
+    userLastName: user.userLastName,
+  };
 };
 
 const addressInfo = async (country, postcode, detail, userId) => {
