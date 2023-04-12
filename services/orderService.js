@@ -18,7 +18,8 @@ const payByPoint = async (orderNumber, userId) => {
 
 const createOrder = async (userId, totalPrice) => {
   const orderNum = uuid();
-  return orderDao.createOrder(userId, totalPrice, orderNum);
+  await orderDao.createOrder(userId, totalPrice, orderNum);
+  return orderNum;
 };
 
 const orderInfo = async (userId) => {
