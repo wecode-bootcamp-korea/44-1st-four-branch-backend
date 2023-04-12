@@ -44,12 +44,17 @@ const signIn = async (email, password) => {
   return token;
 };
 
-const getUserById = async (userId) => {
-  return userDao.getUserById(userId);
+const addressInfo = async (country, postcode, detail, userId) => {
+  return userDao.addressInfo(country, postcode, detail, userId);
+};
+
+const getUserById = async (userId, lastName) => {
+  return userDao.getUserById(userId, lastName);
 };
 
 module.exports = {
   signUp,
   signIn,
+  addressInfo,
   getUserById,
 };
