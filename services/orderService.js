@@ -16,13 +16,9 @@ const payByPoint = async (orderNumber, userId) => {
   return await userDao.getUserById(userId);
 };
 
-const createOrder = async (userId, totalprice, statusid) => {
+const createOrder = async (userId, totalPrice) => {
   const orderNum = uuid();
-  return orderDao.createOrder(userId, totalprice, orderNum, statusid);
-};
-
-const orderItems = async (userId) => {
-  return orderDao.orderItems(userId);
+  return orderDao.createOrder(userId, totalPrice, orderNum);
 };
 
 const orderInfo = async (userId) => {
@@ -32,6 +28,5 @@ const orderInfo = async (userId) => {
 module.exports = {
   payByPoint,
   createOrder,
-  orderItems,
   orderInfo,
 };
