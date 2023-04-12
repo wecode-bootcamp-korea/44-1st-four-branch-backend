@@ -20,7 +20,20 @@ const signIn = catchAsync(async (req, res) => {
   res.status(200).json(resUser);
 });
 
+const addressInfo = catchAsync(async (req, res) => {
+  const { country, postcode, detail } = req.body;
+  const userId = req.user.id;
+  if (!country || !postcode || !detail) {
+    const error = new Error('KEY ERROR');
+    error.statusCode = 400;
+    throw error;
+  }
+  await userService.addressInfo(country, postcode, detail, userId);
+  res.status(201).json({ message: 'ADDRESS REGIST SUCESS' });
+});
+
 module.exports = {
   signUp,
   signIn,
+  addressInfo,
 };
