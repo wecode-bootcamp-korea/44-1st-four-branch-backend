@@ -42,10 +42,10 @@ const signIn = async (email, password) => {
     expiresIn: '5d',
   });
 
-  const resUser = {};
-  resUser.token = token;
-  resUser.userLastName = user.userLastName;
-  return resUser;
+  return {
+    token: token,
+    userLastName: user.userLastName,
+  };
 };
 
 const getUserById = async (userId) => {
