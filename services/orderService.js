@@ -3,6 +3,11 @@ const userDao = require('../models/userDao');
 const { v4: uuid } = require('uuid');
 
 const payByPoint = async (orderNumber, userId) => {
+  if (!orderNumber) {
+    const err = new Error('ORDERNUMBER_NEEDED');
+    err.statusCode = 400;
+    throw err;
+  }
   const user = await userDao.getUserById(userId);
   const [order] = await orderDao.orderInfo(userId);
 
@@ -18,7 +23,8 @@ const payByPoint = async (orderNumber, userId) => {
 
 const createOrder = async (userId, totalPrice) => {
   const orderNum = uuid();
-  return orderDao.createOrder(userId, totalPrice, orderNum);
+  await orderDao.createOrder(userId, totalPrice, orderNum);
+  return orderNum;
 };
 
 const orderInfo = async (userId) => {

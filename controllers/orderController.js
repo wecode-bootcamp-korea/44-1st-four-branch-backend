@@ -17,8 +17,8 @@ const createOrder = catchAsync(async (req, res) => {
     error.statusCode = 400;
     return error;
   }
-  await orderService.createOrder(userId, totalPrice);
-  res.status(201).json({ message: 'ORDER DEPOSIT' });
+  const orderNum = await orderService.createOrder(userId, totalPrice);
+  res.status(201).json(orderNum);
 });
 
 const orderInfo = catchAsync(async (req, res) => {
