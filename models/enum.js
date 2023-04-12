@@ -1,4 +1,4 @@
-const orderStatuses = Object.freeze({
+const OrderStatuses = Object.freeze({
   결제대기: 1,
   결제완료: 2,
   배송준비중: 3,
@@ -9,4 +9,4 @@ const orderStatuses = Object.freeze({
   환불완료: 8,
 });
 
-module.exports = { orderStatuses };
+module.exports = OrderStatuses;

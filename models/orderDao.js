@@ -1,5 +1,5 @@
 const appDataSource = require('./appDataSource');
-const orderStatus = require('./enum');
+const OrderStatuses = require('./enum');
 
 const createOrder = async (userId, totalPrice, orderNum) => {
   const queryRunner = appDataSource.createQueryRunner();
@@ -30,7 +30,7 @@ const createOrder = async (userId, totalPrice, orderNum) => {
         SELECT orders.id, carts.product_id, carts.quantity , orders.status_id
         FROM orders
         JOIN carts ON carts.user_id = orders.user_id
-        WHERE orders.user_id = ? AND orders.status_id = ${orderStatus.결제대기}
+        WHERE orders.user_id = ? AND orders.status_id = ${OrderStatuses.결제대기}
       `,
       [userId]
     );
