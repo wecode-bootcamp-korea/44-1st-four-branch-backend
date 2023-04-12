@@ -1,4 +1,5 @@
 const appDataSource = require('./appDataSource');
+const orderStatus = require('./enum');
 
 const createOrder = async (userId, totalPrice, orderNum) => {
   const queryRunner = appDataSource.createQueryRunner();
@@ -29,7 +30,7 @@ const createOrder = async (userId, totalPrice, orderNum) => {
         SELECT orders.id, carts.product_id, carts.quantity , orders.status_id
         FROM orders
         JOIN carts ON carts.user_id = orders.user_id
-        WHERE orders.user_id = ? AND orders.status_id = 1
+        WHERE orders.user_id = ? AND orders.status_id = ${orderStatus.결제대기}
       `,
       [userId]
     );
@@ -50,19 +51,29 @@ const orderInfo = async (userId) => {
       `SELECT
       orders.number as orderNumber,
       orders.updated_at as orderDate,
-      JSON_OBJECT('country', MAX(addresses.country), 'postcode', MAX(addresses.postcode), 'detail', MAX(addresses.detail)) as address,
-      JSON_ARRAYAGG(JSON_OBJECT('productName', products.name,'quantity', order_items.quantity, 'price', products.price , 'size', sizes.size)) as orderItems,
+      JSON_OBJECT('country',MAX(addresses.country),'postcode',MAX(addresses.postcode),'detail',MAX(addresses.detail)) as userAddress,
+      JSON_ARRAYAGG(
+        JSON_OBJECT(
+          'productName', products.name,
+          'quantity', order_items.quantity,
+          'price', products.price,
+          'size', sizes.size
+        )
+      ) as orderItems,
       order_statuses.status as orderStatus,
-      orders.total_price as totalPrice
-      FROM orders
-      JOIN order_items ON orders.id = order_items.order_id
-      JOIN order_statuses ON orders.status_id = order_statuses.id
-      JOIN products ON order_items.product_id = products.id
-      JOIN addresses ON orders.user_id = addresses.user_id
-      JOIN sizes ON products.size_id = sizes.id
-      WHERE orders.user_id = ?
-      GROUP BY orders.id
-      ORDER BY orders.id DESC LIMIT 1 
+      orders.total_price as totalPrice,
+      users.last_name as userLastName,
+      users.first_name as userFirstName
+    FROM orders
+    JOIN order_items ON orders.id = order_items.order_id
+    JOIN order_statuses ON orders.status_id = order_statuses.id
+    JOIN products ON order_items.product_id = products.id
+    JOIN addresses ON orders.user_id = addresses.user_id
+    JOIN sizes ON products.size_id = sizes.id
+    JOIN users ON users.id = orders.user_id
+    WHERE orders.user_id = ?
+    GROUP BY orders.id
+    ORDER BY orders.id DESC LIMIT 1
       `,
       [userId]
     );
