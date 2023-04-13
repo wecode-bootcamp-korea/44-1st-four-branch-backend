@@ -4,9 +4,10 @@ const { v4: uuid } = require('uuid');
 
 const payByPoint = async (orderNumber, userId) => {
   const user = await userDao.getUserById(userId);
-  const [order] = await orderDao.orderInfo(userId);
-
-  if (user.point < order.totalPrice) {
+  const [order] = await orderDao.getOrderInfo(userId);
+  console.log(user);
+  console.log(order);
+  if (user.point - order.totalPrice < 0) {
     const err = new Error('INSUFFICIENT_POINT');
     err.statusCode = 400;
     throw err;
@@ -22,12 +23,12 @@ const createOrder = async (userId, totalPrice) => {
   return orderNum;
 };
 
-const orderInfo = async (userId) => {
-  return orderDao.orderInfo(userId);
+const getOrderInfo = async (userId) => {
+  return orderDao.getOrderInfo(userId);
 };
 
 module.exports = {
   payByPoint,
   createOrder,
-  orderInfo,
+  getOrderInfo,
 };

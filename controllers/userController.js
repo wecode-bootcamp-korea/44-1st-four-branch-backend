@@ -32,8 +32,13 @@ const addressInfo = catchAsync(async (req, res) => {
   res.status(201).json({ message: 'ADDRESS REGIST SUCESS' });
 });
 
+const getUserById = catchAsync(async (req, res) => {
+  res.status(200).json(req.user);
+});
+
 module.exports = {
   signUp,
   signIn,
   addressInfo,
+  getUserById,
 };

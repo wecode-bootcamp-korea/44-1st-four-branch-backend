@@ -9,7 +9,7 @@ const creatUser = async (firstName, lastName, email, password) => {
         email,
         password,
         point
-      ) VALUES (?, ?, ?, ?, 990000)
+      ) VALUES (?, ?, ?, ?, 10000000)
       `,
       [firstName, lastName, email, password, email]
     );
@@ -86,8 +86,8 @@ const getUserById = async (userId) => {
     const [user] = await appDataSource.query(
       `SELECT
         id,
-        first_name,
-        last_name,
+        first_name userFirstName,
+        last_name userLastName,
         email,
         point,
         agreements,
