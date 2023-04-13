@@ -9,7 +9,7 @@ const creatUser = async (firstName, lastName, email, password) => {
         email,
         password,
         point
-      ) VALUES (?, ?, ?, ?, 990000)
+      ) VALUES (?, ?, ?, ?, 10000000)
       `,
       [firstName, lastName, email, password, email]
     );

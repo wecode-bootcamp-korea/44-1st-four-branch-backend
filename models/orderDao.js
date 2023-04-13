@@ -91,13 +91,15 @@ const createOrder = async (userId, totalPrice, orderNum) => {
   }
 };
 
-const orderInfo = async (userId) => {
+const getOrderInfo = async (userId) => {
   try {
-    return await appDataSource.query(
+    const orderInfo = await appDataSource.query(
       `SELECT
       orders.number as orderNumber,
       orders.updated_at as orderDate,
-      JSON_OBJECT('country',MAX(addresses.country),'postcode',MAX(addresses.postcode),'detail',MAX(addresses.detail)) as userAddress,
+      a.country as country,
+      a.postcode as postcode,
+      a.detail as addressDetail,
       JSON_ARRAYAGG(
         JSON_OBJECT(
           'productName', products.name,
@@ -114,7 +116,14 @@ const orderInfo = async (userId) => {
     LEFT JOIN order_items ON orders.id = order_items.order_id
     LEFT JOIN order_statuses ON orders.status_id = order_statuses.id
     LEFT JOIN products ON order_items.product_id = products.id
-    LEFT JOIN addresses ON orders.address_id = addresses.id
+    LEFT JOIN (
+      SELECT 
+        id,
+        country,
+        postcode,
+        detail
+      FROM addresses) a
+      ON orders.address_id = a.id
     LEFT JOIN sizes ON products.size_id = sizes.id
     LEFT JOIN users ON users.id = orders.user_id
     WHERE orders.user_id = ?
@@ -123,6 +132,8 @@ const orderInfo = async (userId) => {
       `,
       [userId]
     );
+
+    return orderInfo;
   } catch (err) {
     err.message = 'DATABASE_ERROR';
     err.statusCode = 400;
@@ -133,5 +144,5 @@ const orderInfo = async (userId) => {
 module.exports = {
   payByPoint,
   createOrder,
-  orderInfo,
+  getOrderInfo,
 };

@@ -9,7 +9,8 @@ const payByPoint = catchAsync(async (req, res) => {
     throw err;
   }
   const user = await orderService.payByPoint(orderNumber, req.user.id);
-  return res.status(200).json(user);
+  const [orderInfo] = await orderService.getOrderInfo(req.user.id);
+  return res.status(200).json({ user: user, orderInfo: orderInfo });
 });
 
 const createOrder = catchAsync(async (req, res) => {
@@ -20,18 +21,19 @@ const createOrder = catchAsync(async (req, res) => {
     error.statusCode = 400;
     throw error;
   }
-  const orderNum = await orderService.createOrder(userId, totalPrice);
-  res.status(201).json(orderNum);
+  await orderService.createOrder(userId, totalPrice);
+  const [orderInfo] = await orderService.getOrderInfo(userId);
+  res.status(201).json(orderInfo);
 });
 
-const orderInfo = catchAsync(async (req, res) => {
+const getOrderInfo = catchAsync(async (req, res) => {
   const userId = req.user.id;
-  const orderDetail = await orderService.orderInfo(userId);
-  res.status(200).json(orderDetail);
+  const orderInfo = await orderService.getOrderInfo(userId);
+  res.status(200).json(orderInfo);
 });
 
 module.exports = {
   payByPoint,
   createOrder,
-  orderInfo,
+  getOrderInfo,
 };

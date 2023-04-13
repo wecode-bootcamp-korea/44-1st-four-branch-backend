@@ -35,6 +35,7 @@ const addressInfo = catchAsync(async (req, res) => {
 const getUserById = catchAsync(async (req, res) => {
   res.status(200).json(req.user);
 });
+
 module.exports = {
   signUp,
   signIn,
