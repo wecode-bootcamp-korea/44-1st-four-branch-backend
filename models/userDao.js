@@ -86,8 +86,8 @@ const getUserById = async (userId) => {
     const [user] = await appDataSource.query(
       `SELECT
         id,
-        first_name,
-        last_name,
+        first_name userFirstName,
+        last_name userLastName,
         email,
         point,
         agreements,
