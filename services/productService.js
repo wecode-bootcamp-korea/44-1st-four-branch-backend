@@ -10,15 +10,31 @@ const getProductsByCondition = async (
   pId,
   isMain,
   orderBy,
-  sorting
+  sorting,
+  offset,
+  limit
 ) => {
+  if (!orderBy !== !sorting) {
+    const err = new Error('CONDITION_NEEDS_TO_BE_PAIR');
+    err.statusCode = 400;
+    throw err;
+  }
+
+  if (!offset !== !limit) {
+    const err = new Error('CONDITION_NEEDS_TO_BE_PAIR');
+    err.statusCode = 400;
+    throw err;
+  }
+
   return productDao.getProductsByCondition(
     subId,
     mainId,
     pId,
     isMain,
     orderBy,
-    sorting
+    sorting,
+    offset,
+    limit
   );
 };
 

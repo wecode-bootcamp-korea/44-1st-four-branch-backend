@@ -8,7 +8,8 @@ const productSearch = catchAsync(async (req, res) => {
 });
 
 const getProducts = catchAsync(async (req, res) => {
-  const { subid, mainid, pid, ismain, orderby, sorting } = req.query;
+  const { subid, mainid, pid, ismain, orderby, sorting, offset, limit } =
+    req.query;
 
   const products = await productService.getProductsByCondition(
     subid,
@@ -16,7 +17,9 @@ const getProducts = catchAsync(async (req, res) => {
     pid,
     ismain,
     orderby,
-    sorting
+    sorting,
+    offset,
+    limit
   );
   res.status(200).json(products);
 });
