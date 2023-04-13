@@ -27,8 +27,8 @@ const getProductsByCondition = async (
   isMain,
   orderBy,
   sorting,
-  offset,
-  limit
+  offset = 0,
+  limit = 10
 ) => {
   try {
     const conditions = [
