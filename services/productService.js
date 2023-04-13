@@ -10,7 +10,9 @@ const getProductsByCondition = async (
   pId,
   isMain,
   orderBy,
-  sorting
+  sorting,
+  offset,
+  limit
 ) => {
   return productDao.getProductsByCondition(
     subId,
@@ -18,7 +20,9 @@ const getProductsByCondition = async (
     pId,
     isMain,
     orderBy,
-    sorting
+    sorting,
+    offset,
+    limit
   );
 };
 

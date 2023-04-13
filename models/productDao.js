@@ -26,7 +26,9 @@ const getProductsByCondition = async (
   pId,
   isMain,
   orderBy,
-  sorting
+  sorting,
+  offset,
+  limit
 ) => {
   try {
     const conditions = [
@@ -38,12 +40,17 @@ const getProductsByCondition = async (
 
     const orderings = [
       orderBy && `ORDER BY ${orderBy}`,
-      sorting && ` ${sorting}`,
+      sorting && `${sorting}`,
+    ].filter(Boolean);
+
+    const pagination = [
+      limit && `LIMIT ${limit}`,
+      offset && `OFFSET ${offset}`,
     ].filter(Boolean);
 
     const condition = conditions[0] || '';
-
-    const ordering = orderings.join('') || '';
+    const ordering = orderings.join(' ') || '';
+    const paging = pagination.join(' ') || '';
 
     return await appDataSource.query(
       `SELECT 
@@ -75,7 +82,8 @@ const getProductsByCondition = async (
         GROUP BY pig.product_id
     ) joined_ig ON joined_ig.pid = p.id        
     ${condition}
-    ${ordering}`
+    ${ordering}
+    ${paging}`
     );
   } catch (err) {
     err.message = 'DATABASE_ERROR';
