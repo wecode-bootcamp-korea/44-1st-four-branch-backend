@@ -6,7 +6,7 @@
 * 개발 인원:   
   `Frontend`: 김영운, 박지연
   `Backend`: 장다희(Project Manager), 왕광현(Product Manager)
- 
+* 클론한 사이트: [이솝(Aesop)](https://www.aesop.com/kr/)
  
  ## 적용기술
 * BackEnd   
