@@ -8,4 +8,8 @@
   `Backend`: 장다희(Project Manager), 왕광현(Product Manager)
  
  
+ ## 적용기술
+* BackEnd : Node.js, Express, Mysql
+* 협업 : Github, Trello, Slack, Notion
+ 
  
