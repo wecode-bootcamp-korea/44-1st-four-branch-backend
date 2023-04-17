@@ -12,6 +12,11 @@
 * BackEnd : Node.js, Express, Mysql
 * 협업 : Github, Trello, Slack, Notion
 
- ## 구현기능
+ ## ERD
  
+ ![4bsop-data (Dahee)](https://user-images.githubusercontent.com/122084854/232357000-63a4813b-85de-4ae2-b3fe-a7ddbd2c5af7.png)
+
+ ## 기능구현
+ 
+ ### user
  
