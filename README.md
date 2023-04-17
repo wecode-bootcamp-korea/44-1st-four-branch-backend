@@ -6,7 +6,7 @@
 * 개발 인원:   
   `Frontend`: 김영운, 박지연 
   `Backend`: 장다희(Project Manager), 왕광현(Product Manager) [프론트엔드Github](https://github.com/wecode-bootcamp-korea/44-1st-four-branch-frontend)
-* 클론한 사이트: [이솝(Aesop)](https://www.aesop.com/kr/)
+* 클론코딩 사이트: [이솝(Aesop)](https://www.aesop.com/kr/)
  
  ## 적용기술
 * BackEnd   
