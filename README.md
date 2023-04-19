@@ -6,7 +6,7 @@
 
 ## 프로젝트 기간 & 인원
 * 프로젝트 기간: 2주 (2023.04.03 ~ 2023.04.16)   
-* 개발 인원:   
+* 개발 인원:  
   `Frontend`: 김영운, 박지연 <br>
   `Backend`: 장다희(Project Manager), 왕광현(Product Manager) <br>
 * [프론트엔드 Github 저장소](https://github.com/wecode-bootcamp-korea/44-1st-four-branch-frontend)
@@ -33,21 +33,42 @@
 
  ## 핵심 기능
  
- ### User
+ ### Users
  
- * ##### 회원가입 - 이메일과 비밀번호 유효성을 정규표현식 사용하여 검증, DB에 있는 이메일로 가입시도 시 가입하지 못하게 하고, bcrypt사용하여 비밀번호 암호화하여 DB에 저장
+ ![image](https://user-images.githubusercontent.com/120387100/233087329-c3f7df3f-7c87-411f-b244-3d7ce4cff2f9.png)
+
+ **회원가입**
+ - 이메일과 비밀번호 유효성을 정규표현식 사용하여 검증, DB에 있는 이메일로 가입시도 시 가입하지 못하게 하고, bcrypt사용하여 비밀번호 암호화하여 DB에 저장
+<br> 
+
+ ![image](https://user-images.githubusercontent.com/120387100/233087365-241534c2-d258-4c9e-b0f7-748c8f4da9c1.png)
+
+ **로그인** 
+ - bcrypt로 암호화 된 비밀번호와 사용자가 입력한 비밀번호 비교하여 일치하지 않을 시 오류메세지 출력, 성공적으로 로그인 시 jwt이용하여 토큰 발급
+
+***
  
- * ##### 로그인 - bcrypt로 암호화 된 비밀번호와 사용자가 입력한 비밀번호 비교하여 일치하지 않을 시 오류메세지 출력, 성공적으로 로그인 시 jwt이용하여 토큰 발급
-
+ ### Products
  
- ### Product
+ ![image](https://user-images.githubusercontent.com/120387100/233088115-639ab72f-d1a8-4b5d-85ba-87697985c95d.png)
 
- * ##### 상품검색 - 상품의 id, 이름, 이미지를 쿼리파라미터로 요청 받아 해당 키워드가 있는 제품만 노출되게 함
+ **상품 정보** 
+ - 메인/서브 카테고리
+ - 상품 상세
+ - 정렬
+ - 페이지네이션
+
+![image](https://user-images.githubusercontent.com/120387100/233089432-26f94f6a-1013-4c5d-acec-33a1970afefb.png)
+
+<br>
+
+ **상품 검색**
+ - 상품의 id, 이름, 이미지를 쿼리파라미터로 요청 받아 해당 키워드가 있는 제품만 노출되게 함
  
- * ##### 상품리스트 - 
+  
 
- * ##### 
+### Carts
 
-### Cart
-
-### Order
+### Orders
+**주문**
+**결제**
