@@ -1,5 +1,8 @@
-# 44-1st-four-branch-backend
- 장다희, 왕광현
+# 4bsop 화장품 브랜드 커머셜 웹사이트 제작
+> 위코드 44기 1차 프로젝트 - Backend <br>
+> 하이엔드 화장품 브랜드 Aesop을 모델링하여 커머셜 웹사이트 제작<br>
+> Team: four-branch<br>
+> 장다희, 왕광현<br>
 
 ## 프로젝트 기간 & 인원
 * 프로젝트 기간: 2주 (2023.04.03 ~ 2023.04.16)   
@@ -9,7 +12,7 @@
 * [프론트엔드 Github 저장소](https://github.com/wecode-bootcamp-korea/44-1st-four-branch-frontend)
 * 모델링한 사이트: [이솝(Aesop)](https://www.aesop.com/kr/)
  
- ## 적용 기술
+ ## 사용 기술
 
 * BackEnd   
 
@@ -26,9 +29,9 @@
 
  ## ERD
  
- ![4bsop-data (Dahee)](https://user-images.githubusercontent.com/122084854/232357000-63a4813b-85de-4ae2-b3fe-a7ddbd2c5af7.png)
+![image](https://user-images.githubusercontent.com/120387100/233080857-d5912540-1add-4c1d-aa7f-048d97d52026.png)
 
- ## 기능구현
+ ## 핵심 기능
  
  ### User
  
@@ -44,3 +47,7 @@
  * ##### 상품리스트 - 
 
  * ##### 
+
+### Cart
+
+### Order
