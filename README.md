@@ -4,15 +4,25 @@
 ## 프로젝트 기간 & 인원
 * 프로젝트 기간: 2주 (2023.04.03 ~ 2023.04.16)   
 * 개발 인원:   
-  `Frontend`: 김영운, 박지연 
-  `Backend`: 장다희(Project Manager), 왕광현(Product Manager) [프론트엔드Github](https://github.com/wecode-bootcamp-korea/44-1st-four-branch-frontend)
-* 클론코딩 사이트: [이솝(Aesop)](https://www.aesop.com/kr/)
+  `Frontend`: 김영운, 박지연 <br>
+  `Backend`: 장다희(Project Manager), 왕광현(Product Manager) <br>
+* [프론트엔드 Github 저장소](https://github.com/wecode-bootcamp-korea/44-1st-four-branch-frontend)
+* 모델링한 사이트: [이솝(Aesop)](https://www.aesop.com/kr/)
  
- ## 적용기술
+ ## 적용 기술
+
 * BackEnd   
-<img src="https://camo.githubusercontent.com/d2e764d63294c27eff3598ae3a0df5884b4efcabbdbbd200e51472cddf4a3f03/68747470733a2f2f74656368737461636b2d67656e657261746f722e76657263656c2e6170702f6a732d69636f6e2e737667" width=7%> <img src="https://camo.githubusercontent.com/418cbff54fe0ff385225ac464200a519c169c0fd3fb80402a8a9f977efd63c7a/68747470733a2f2f74656368737461636b2d67656e657261746f722e76657263656c2e6170702f6e67696e782d69636f6e2e737667" width=7%> <img src="https://camo.githubusercontent.com/b3578157355b1ac74d38d0f89d1022095ba7f7a988db091cef0fa4a62685e87e/68747470733a2f2f74656368737461636b2d67656e657261746f722e76657263656c2e6170702f6d7973716c2d69636f6e2e737667" width=7%>
-* 협업  
-<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/trello-0055cc?style=for-the-badge&logo=trello&logoColor=yellow"> <img src="https://img.shields.io/badge/slack-4A154B?style=for-the-badge&logo=Slack&logoColor=wihte"> <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white"> 
+
+ |JavaScript|Node.js|MySql|Rest|Prettier|Docker|AWS|
+|---|---|---|---|---|---|---|
+|<div style="display: flex; align-items: flex-start;"><img src="https://techstack-generator.vercel.app/js-icon.svg" alt="icon" width="65" height="65" /></div>| <div style="display: flex; align-items: flex-start;"><img src="https://techstack-generator.vercel.app/nginx-icon.svg" alt="icon" width="65" height="65" /></div>| <div style="display: flex; align-items: flex-start;"><img src="https://techstack-generator.vercel.app/mysql-icon.svg" alt="icon" width="65" height="65" /></div>|<div style="display: flex; align-items: flex-start;"><img src="https://techstack-generator.vercel.app/restapi-icon.svg" alt="icon" width="65" height="65" /></div>|<div style="display: flex; align-items: flex-start;"><img src="https://techstack-generator.vercel.app/prettier-icon.svg" alt="icon" width="65" height="65" /></div>|<div style="display: flex; align-items: flex-start;"><img src="https://techstack-generator.vercel.app/docker-icon.svg" alt="icon" width="65" height="65" /></div>|<div style="display: flex; align-items: flex-start;"><img src="https://techstack-generator.vercel.app/aws-icon.svg" alt="icon" width="65" height="65" /></div>|
+<br>
+
+* 협업 <br><br>
+<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> <br>
+<img src="https://img.shields.io/badge/trello-0055cc?style=for-the-badge&logo=trello&logoColor=yellow"> <br>
+<img src="https://img.shields.io/badge/slack-4A154B?style=for-the-badge&logo=Slack&logoColor=wihte"> <br>
+<img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white"> <br>
 
  ## ERD
  
