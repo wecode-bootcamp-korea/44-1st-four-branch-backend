@@ -1,6 +1,6 @@
 # 4bsop 커머셜 웹사이트 제작 (Backend)
 장다희 ([**Github**](https://github.com/walwald), [회고록](https://walwaldev.tistory.com/49))<br>
-왕광현 ([**Github**](https://github.com/), [회고록]())<br>
+왕광현 ([**Github**](https://github.com/), [회고록](https://khwang24.tistory.com/14))<br>
 > 위코드 44기 1차 프로젝트 <br>
 > 하이엔드 화장품 브랜드 Aesop을 모델링하여 커머셜 웹사이트 제작<br>
 [결과물 url](http://s3-hosting-kimyoungwoon.s3-website.ap-northeast-2.amazonaws.com/)
